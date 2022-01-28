@@ -12,13 +12,15 @@ For those who want to dive right into building machine learning models, click th
   
 <summary>Machine Learning Basics</summary>
 
-Linear Regression is... 
+THe Machine Learning for Beginners dashboard has four models available for selection.  
+  
+The first model is a simple linear regression model.  Linear regression is a model that looks for a linear relationship between variables.  In the simplest form of the model, two variables are used.  The dependent variable is the variable that the model will predict.  The predicted values of the dependent variable are dependent on the behavior of the other variable, the indepdendent variable.  
 
-The Decision Tree is a supervised learning method. In classification problems, it predicts target values by using the features of a dataset to make decisions.
-
+The Decision Tree is a supervised learning method. A decision tree model predicts target values by using the features of a dataset to make decisions.  For classification problems, 
+  
+The Random Forest Classifier is a meta estimator that creates several decision trees from sub-sets of data and averages the results of each to make predictions.  Since the model uses multiple decision trees (classifiers), Random Forest is an ensemble learning method.  Each decision tree in the ensemble makes its own predictions and the results are compiled, with the most common result being identified.  The decision trees are not correlated with each other.  
+  
 The Gradient Boosting Classifier is an additive model that combines other models together to create one model that performs better than its parts.
-
-The Random Forest Classifier is a meta estimator that creates several decision trees from sub-sets of data and averages the results of each to make predictions.
 
 </details>
 
@@ -36,7 +38,7 @@ conda activate mlfb
 ```
 3.  Run the following command to download the requirements.txt file:  
 ```
-wget https://github.com/pdellis85/MLFB/blob/1219ec8af37089d0c02583ec6da01cdcee0bea53/Sample%20code/requirements.txt
+wget https://github.com/pdellis85/MLFB/blob/1219ec8af37089d0c02583ec6da01cdcee0bea53/Sample%20code/requirements.txt REPLACE  WITH PERM LINK FOR FINAL DRAFT
 ```
 4.  Enter the following command to install all of the libraries and dependencies you'll need to run the dashboard:
 ```
@@ -61,6 +63,10 @@ Brownlee, Jason. *A Gentle Introduction to the Gradient Boosting Algorithm for M
 Brownlee, Jason. *Bagging and Random Forest for Imbalanced Classification*. https://machinelearningmastery.com/bagging-and-random-forest-for-imbalanced-classification/. Retrieved 2 December 2021.
 
 Dataprofessor.  *EDA App*.  https://github.com/dataprofessor/eda-app.git.  Retrieved 22 January 2022.
+
+IBM.  *Linear Regression*. https://www.ibm.com/topics/linear-regression.  Retrieved 27 January 2022.
+
+IBM.  *Random Forest*.  https://www.ibm.com/cloud/learn/random-forest.  Retrieved 27 January 2022.
 
 IBM Cloud Education. *Machine Learning*. https://www.ibm.com/cloud/learn/machine-learning.  Retrieved 27 January 2022.
 
