@@ -78,7 +78,7 @@ if uploaded_file is not None:
     before = beforeSTable()
     after = afterSTable()
     dataset = reading_dataset()
-    task = st.selectbox("Menu", ["Data Profiler", "Data Cleaner", "Build Machine Learning Models"])
+    task = st.selectbox("Menu", ["Data Profiler", "Data Cleaner", "Build Machine Learning Models"]) # Drop down with options
     st.session_state.beforeSS = before
     st.session_state.afterSS = after
     
@@ -265,63 +265,8 @@ if uploaded_file is not None:
 
     bst = st.session_state.beforeSS
     ast = st.session_state.afterSS
-    if task == "Review Summary Report and Download Adjusted Data":
-        st.write("'Before' Summary Table")
-        st.dataframe(bst.style.format({"Column DQ Score(%)": '{:,.2f}'}))
 
-        st.write("'After' Summary Table")
-        st.dataframe(ast.style.format({"Column DQ Score(%)": '{:,.2f}'}))
-
-        st.write("")
-        bodq_score = round(bst["Column DQ Score(%)"].mean(), 2)
-        aodq_score = round(ast["Column DQ Score(%)"].mean(), 2)
-
-        if bodq_score <= 25:
-            before_arrow = 1
-        elif bodq_score > 25 and bodq_score <= 50:
-            before_arrow = 2
-        elif bodq_score > 50 and bodq_score <= 75:
-            before_arrow = 3
-        else:
-            before_arrow = 4
-
-        if aodq_score <= 25:
-            after_arrow = 1
-        elif aodq_score > 25 and aodq_score <= 50:
-            after_arrow = 2
-        elif aodq_score > 50 and aodq_score <= 75:
-            after_arrow = 3
-        else:
-            after_arrow = 4
-
-        odq_graph = st.columns(2)
-        with odq_graph[0]:
-            gauge(labels=['VERY LOW', 'LOW', 'MEDIUM', 'HIGH'], \
-                  colors=["#1b0203", "#ED1C24", '#FFCC00', '#007A00'], arrow=before_arrow, title=str(bodq_score) + '%')
-            plt.title("'Before' Overall DQ Score", fontsize=16)
-            st.pyplot()
-        with odq_graph[1]:
-            gauge(labels=['VERY LOW', 'LOW', 'MEDIUM', 'HIGH'], \
-                  colors=["#1b0203", "#ED1C24", '#FFCC00', '#007A00'], arrow=after_arrow, title=str(aodq_score) + '%')
-            plt.title("'After' Overall DQ Score", fontsize=16)
-            st.pyplot()
-
-        prepare_expander = st.expander("Prepare Dataset for Download", expanded=False)
-        with prepare_expander:
-            session_state = SessionState.get(df=dataset)
-            if st.checkbox("Reorder and Eliminate Columns", key = "reorder_eliminate"):
-                col_for_order = dataset.columns
-                colOrder = st.multiselect("Select the columns in the order you want them to be", col_for_order,
-                                              key="multiselect_forOrder22")
-                if st.button("Set", key="set_order2"):
-                    session_state.df = dataset[colOrder]
-                    st.success("The adjustments were applied.")
-                    st.write("Sample", session_state.df.head())
-                    download_button(get_table_download_link(session_state.df), "AdjustedData.xlsx", "Download (.xlsx)")
-
-            else:
-                download_button(get_table_download_link(dataset), "AdjustedData.xlsx", "Download (.xlsx)")
-
+# If nothing if selected from the drop down, then a message indicating that a file should be uploaded will display    
 else:
     st.write("")
     st.info('Awaiting for file to be uploaded.')
