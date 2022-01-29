@@ -12,7 +12,7 @@ For those who want to dive right into building machine learning models, click th
   
 <summary>Machine Learning Basics</summary>
 
-THe Machine Learning for Beginners dashboard has four models available for selection.  
+The Machine Learning for Beginners dashboard has four models available for selection.  
   
 The first model is a simple linear regression model.  Linear regression is a model that looks for a linear relationship between variables.  In the simplest form of the model, two variables are used.  The dependent variable is the variable that the model will predict.  The predicted values of the dependent variable are dependent on the behavior of the other variable, the indepdendent variable.  
 
@@ -38,11 +38,11 @@ conda activate mlfb
 ```
 3.  Run the following command to download the requirements.txt file:  
 ```
-wget https://github.com/pdellis85/MLFB/blob/1219ec8af37089d0c02583ec6da01cdcee0bea53/Sample%20code/requirements.txt REPLACE  WITH PERM LINK FOR FINAL DRAFT
+wget https://github.com/pdellis85/MLFB/blob/main/Code/Sample_code/requirements.txt
 ```
 4.  Enter the following command to install all of the libraries and dependencies you'll need to run the dashboard:
 ```
-condainstall -r requirements.txt
+pip install -r requirements.txt
 ```
 5.  Download the contents of this repository from https://github.com/pdellis85/MLFB/archive/refs/heads/main.zip.  Unzip the file and move the MLFB file somewhere on your computer (like your desktop).  You can also clone this repository using the command prompt or [Git Hub Dekstop](https://desktop.github.com/).
   
@@ -56,7 +56,7 @@ streamlit run app.py
 
 # References and Resources
 
-Bailgoyem.  *DataQtor*  https://github.com/baligoyem/dataqtor.git.  Retrieve 22 January 2022.
+Bailgoyem.  *DataQtor*.  https://github.com/baligoyem/dataqtor.git.  Retrieve 22 January 2022.
 
 Brownlee, Jason. *A Gentle Introduction to the Gradient Boosting Algorithm for Machine Learning.*. https://machinelearningmastery.com/gentle-introduction-gradient-boosting-algorithm-machine-learning/. Retrieved 3 December 2021.
 
