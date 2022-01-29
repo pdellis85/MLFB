@@ -38,7 +38,7 @@ conda activate mlfb
 ```
 3.  Run the following command to download the requirements.txt file:  
 ```
-wget https://github.com/pdellis85/MLFB/blob/main/Code/Sample_code/requirements.txt
+wget https://raw.githubusercontent.com/pdellis85/MLFB/main/Code/Sample_code/requirements.txt
 ```
 4.  Enter the following command to install all of the libraries and dependencies you'll need to run the dashboard:
 ```
