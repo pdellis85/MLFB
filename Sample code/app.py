@@ -1,10 +1,5 @@
 # This file and its imported files are based on code from https://github.com/baligoyem/dataqtor.git
 
-<<<<<<< Updated upstream:Sample code/app.py
-import streamlit as st
-from streamlit import caching
-import SessionState
-=======
 from cgi import test
 from streamlit_pandas_profiling import st_profile_report
 import sklearn
@@ -19,7 +14,6 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 import plotly.express as px
 import streamlit as st
 from streamlit import caching
->>>>>>> Stashed changes:Code/Sample_code/app.py
 import pandas as pd
 from pandas_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
@@ -83,13 +77,9 @@ def reading_dataset():
 
 # Sidebar configuration for file upload area
 with st.sidebar.subheader('Upload your file'):
-<<<<<<< Updated upstream:Sample code/app.py
-    uploaded_file = st.sidebar.file_uploader("Please upload a spreadsheet file (xlsx or csv)", type=["xlsx", "csv"])
-=======
     uploaded_file = st.sidebar.file_uploader(
         "Please upload a spreadsheet file (xlsx or csv) containing the data you'd like to use for building machine learning models.", 
                     type=["xlsx", "csv"])
->>>>>>> Stashed changes:Code/Sample_code/app.py
 st.sidebar.subheader("")
 st.sidebar.subheader("")
 if st.sidebar.button("Clear Cache"):
@@ -155,138 +145,6 @@ if uploaded_file is not None:
                     st.success("Null values were deleted.")
                 except KeyError:
                     st.error("Null values were not deleted.")
-<<<<<<< Updated upstream:Sample code/app.py
-            
-        # Convert values in columns
-        st.subheader("Convert Values in Columns")
-        convert_expander = st.expander("Convert Values in a Column by Using String Methods",
-                                            expanded=False)
-        with convert_expander:
-            obj_cols = dataset.select_dtypes(include=['object', 'category']).columns
-            betacolumns1 = st.columns((0.5, 6, 3.5))
-            with betacolumns1[1]:
-                convert_toTitle = st.checkbox(
-                    label="Convert the first character of each word to upper case, 'Aaa Aaaa'")
-            if convert_toTitle:
-                selected_col = st.selectbox("Select the column with the values you want to convert", obj_cols,
-                                            key="forTitle")
-                if st.button("Convert", key="button_for_convertingTitle"):
-                    dataset[selected_col] = dataset[selected_col].str.title()
-                    st.success("Values were converted.")
-
-            betacolumns2 = st.columns((0.5, 6, 3.5))
-            with betacolumns2[1]:
-                convert_toLower = st.checkbox(label="Convert values into lower case, 'aaaaaaaa'")
-            if convert_toLower:
-                selected_col = st.selectbox("Select the column with the values you want to convert", obj_cols,
-                                            key="forLower")
-                if st.button("Convert", key="button_for_convertingLower"):
-                    dataset[selected_col] = dataset[selected_col].str.lower()
-                    st.success("Values were converted.")
-
-            betacolumns3 = st.columns((0.5, 6, 3.5))
-            with betacolumns3[1]:
-                convert_toUpper = st.checkbox(label="Convert values into upper case, 'AAAAA AAAAAA'")
-            if convert_toUpper:
-                selected_col = st.selectbox("Select the column with the values you want to convert", obj_cols,
-                                            key="forUpper")
-                if st.button("Convert", key="button_for_convertingUpper"):
-                    dataset[selected_col] = dataset[selected_col].str.upper()
-                    st.success("Values were converted.")
-
-            betacolumns4 = st.columns((0.5, 6, 3.5))
-            with betacolumns4[1]:
-                convert_to1space = st.checkbox(label="Remove multiple spaces")
-            if convert_to1space:
-                selected_col = st.selectbox("Select the column with the values you want to convert", obj_cols,
-                                            key="forSpace")
-                if st.button("Remove", key="button_for_removingSpace"):
-                    dataset[selected_col] = dataset[selected_col].apply(
-                        lambda x: re.sub(' +', ' ', str(x))).replace('nan', np.NaN)
-                    st.success("Multispaces were removed.")
-
-            betacolumns5 = st.columns((0.5, 6, 3.5))
-            with betacolumns5[1]:
-                strip = st.checkbox(label="Strip")
-            if strip:
-                selected_col = st.selectbox("Select the column with the values you want to convert", obj_cols,
-                                            key="forStrip")
-                strp = st.text_input("Value")
-                if st.button("Strip", key="button_for_Strip"):
-                    dataset[selected_col] = dataset[selected_col].str.strip(strp)
-                    st.success("Changes were applied.")
-
-            betacolumns6 = st.columns((0.5, 6, 3.5))
-            with betacolumns6[1]:
-                replace = st.checkbox(label="Replace")
-            if replace:
-                st.info("If you want to remove the value instead of replacing it with another value, type 'none'.")
-                selected_col = st.selectbox("Select the column with the values you want to change", obj_cols,
-                                            key="forReplace")
-                cols = st.columns((3, 2, 3))
-                with cols[0]:
-                    val1 = st.text_input("Find what:")
-                    if val1 == "(":
-                        val1 = '\('
-                    if val1 == "?":
-                        val1 = '\?'
-                    if val1 == "|":
-                        val1 = '\|'
-                    if val1 == '[':
-                        val1 = '\['
-                    if val1 == '+':
-                        val1 = '\+'
-                    if val1 == ')':
-                        val1 = '\)'
-                    if val1 == '*':
-                        val1 = '\*'
-                    if val1 == '^':
-                        val1 = '\^'
-                    if val1 == '$':
-                        val1 = '\$'
-                with cols[2]:
-                    valrep = st.text_input("Replace with:" )
-                    if valrep == "none":
-                        valrep = ""
-                    if valrep == "(":
-                        valrep = '\('
-                    if valrep == "?":
-                        valrep = '\?'
-                    if valrep == "|":
-                        valrep = '\|'
-                    if valrep == '[':
-                        valrep = '\['
-                    if valrep == '+':
-                        valrep = '\+'
-                    if valrep == ')':
-                        valrep = '\)'
-                    if valrep == '*':
-                        valrep = '\*'
-                    if valrep == '^':
-                        valrep = '\^'
-                    if valrep == '$':
-                        valrep = '\$'
-
-                if st.button("Replace", key="button_for_replace"):
-                    countrep = dataset[selected_col].str.count(val1).sum()
-                    dataset[selected_col] = dataset[selected_col].str.replace(val1, valrep)
-                    success_text = str(int(countrep)) + " values were changed."
-                    st.success(success_text)
-
-            betacolumns5 = st.columns((0.5, 9.5))
-            with betacolumns5[1]:
-                strip = st.checkbox(label="Format Corrector for 'Telefon Numarası' (to reduce the character length of examples like '0XXXXXXXXXX' to 10)")
-            if strip:
-                selected_col = st.selectbox("Select column with 'Telefon Numarası' values",
-                                            obj_cols,
-                                            key="forReducing")
-                first_char = st.text_input("Character")
-                if st.button("Remove", key="button_for_Reducing"):
-                    dataset[selected_col] = dataset[selected_col].astype('str').apply(lambda x : x[1:] if x.startswith(first_char) else x).replace('nan', np.NaN)
-                    st.success("Changes were applied.")
-
-        # Show edited dataset
-=======
 
         # Encode categorical data to integers
         st.subheader("Encode Categorical Data")
@@ -305,18 +163,10 @@ if uploaded_file is not None:
                     st.error("Categorical data not selected.")
 
        # Show edited dataset
->>>>>>> Stashed changes:Code/Sample_code/app.py
         st.subheader("Show Edited Dataset")
         st.write("This displays your dataset with the changes you just made.")
         if st.button("Show my Dataset", key="display"):
             st.write(dataset)
-
-<<<<<<< Updated upstream:Sample code/app.py
-    bst = st.session_state.beforeSS
-    ast = st.session_state.afterSS
-=======
-    # bst = st.session_state.beforeSS
-    # ast = st.session_state.afterSS
 
     # Machine learning models
     else:
@@ -461,7 +311,6 @@ if uploaded_file is not None:
         else:
             xgbClassTree()
 
->>>>>>> Stashed changes:Code/Sample_code/app.py
 
 # If nothing if selected from the drop down, then a message indicating that a file should be uploaded will display    
 else:
