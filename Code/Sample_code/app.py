@@ -8,12 +8,11 @@ import sklearn
 from sklearn import tree
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 import plotly.express as px
 import streamlit as st
 from streamlit import caching
-# import SessionState
 import pandas as pd
 from pandas_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
@@ -289,8 +288,6 @@ if uploaded_file is not None:
         if st.button("Show my Dataset", key="display"):
             st.write(dataset)
 
-    # bst = st.session_state.beforeSS
-    # ast = st.session_state.afterSS
 
     # Data Cleaner configuration
     else:
@@ -306,10 +303,10 @@ if uploaded_file is not None:
 
         # Define features set
         X = df
-        X.drop(y)
+        X = X.drop(labels=target, axis=1) 
 
         # Splitting into Train and Test sets
-        X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(
+        X_train, X_test, y_train, y_test = train_test_split(
             X, y, random_state=78)
 
         # Creating StandardScaler instance
@@ -347,21 +344,37 @@ if uploaded_file is not None:
 
             # Making predictions using the testing data
             predictions = rf_model.predict(X_test_scaled)
-
-            # Calculating the accuracy score
-            acc_score = accuracy_score(y_test, predictions)
-
-            # Display Accuracy Score
-            # st.info(acc_score)
+            
+            # Show/Hide Classification Scores
+            if st.checkbox("Show Classification Scores", False, 1, 
+                           help='''
+                           Accuracy Score represents the ratio of the sum of true positives and true negatives out of all the predictions. In other words, it is the ratio between the number of correct predictions to the total number of predictions.
+                            https://hackernoon.com/idiots-guide-to-precision-recall-and-confusion-matrix-b32d36463556
+                           '''
+                           ):
+                acc_score = accuracy_score(y_test, predictions)
+                prec_score = precision_score(y_test, predictions, average='weighted', zero_division=0)
+                re_score = recall_score(y_test, predictions, average='weighted', zero_division=0)
+                fscore = f1_score(y_test, predictions, average='weighted')
+                col1,col2,col3,col4 = st.columns(4)
+                col1.write("Accuracy_score: ") 
+                col1.write(acc_score)
+                col2.write("Precision_score: ")
+                col2.write(prec_score)
+                col3.write("Recall_score: ")
+                col3.write(re_score)
+                col4.write("F1_score: ")
+                col4.write(fscore)            
             importances = rf_model.feature_importances_
             feat_importances = pd.Series(
                 importances, index=X.columns).sort_values(ascending=True)
-
+            
             # Show Random Forest Plot
-            if st.checkbox("Show Random Forest Features", False, 1):
+            if st.checkbox("Show Visual", False, 1):
                 st.subheader('Random Forest Classifier:')
-                impPlot(feat_importances, 'Random Forest')
+                impPlot(feat_importances, 'Random Forest Classifier')
                 st.write('\n')
+
 
         def decisionTree():
 
@@ -374,52 +387,65 @@ if uploaded_file is not None:
             # Making predictions using the testing data
             predictions = model.predict(X_test_scaled)
 
-            # Calculating the accuracy score
-            acc = accuracy_score(y_test, predictions)
-
-            # Display Accuracy Score
-            # st.info(acc)
-
-            # Show Decision Tree Plot
-            if st.checkbox("Show Decision Tree", False, 2):
+            # Show/Hide Classification Scores
+            if st.checkbox("Show Classification Scores", False, 2):
+                acc_score = accuracy_score(y_test, predictions)
+                prec_score = precision_score(y_test, predictions, average='weighted', zero_division=0)
+                re_score = recall_score(y_test, predictions, average='weighted', zero_division=0)
+                fscore = f1_score(y_test, predictions, average='weighted')
+                col1,col2,col3,col4 = st.columns(4)
+                col1.write("Accuracy_score: ") 
+                col1.write(acc_score)
+                col2.write("Precision_score: ")
+                col2.write(prec_score)
+                col3.write("Recall_score: ")
+                col3.write(re_score)
+                col4.write("F1_score: ")
+                col4.write(fscore)
+            importances = model.feature_importances_
+            feat_importances = pd.Series(
+                importances, index=X.columns).sort_values(ascending=True)
+            
+            # Show Decision Tree Plot            
+            if st.checkbox("Show Visual", False, 2):
                 st.subheader('Decision Tree Classifier:')
-                # max_depth is maximum number of levels in the tree
-                clf = DecisionTreeClassifier(max_depth=3)
-                clf.fit(X, y)
-                b = plt.figure(figsize=(20, 10))
-                a = plot_tree(clf,
-                              filled=True,
-                              rounded=True,
-                              fontsize=14)
-                st.pyplot(b)
+                impPlot(feat_importances, 'Decision Tree Classifier')
+                st.write('\n')
 
         def xgbClassTree():
 
-            # Choose a learning rate and create Gradient Boosting classifier object
-            classifier = GradientBoostingClassifier(
-                n_estimators=100,
-                learning_rate=0.75,
-                max_features=2,
-                max_depth=3,
-                random_state=0
-            )
+            # Creating the decision tree classifier instance
+            classifier = GradientBoostingClassifier()
 
             # Fit the model
-            classifier.fit(X_train_scaled, y_train.ravel())
+            classifier.fit(X_train_scaled, y_train)
 
             # Make Prediction
             predictions = classifier.predict(X_test_scaled)
 
-            # Calculating the accuracy score
-            accs = accuracy_score(y_test, predictions)
+            # Show/Hide Classification Scores
+            if st.checkbox("Show Classification Scores", False, 3):
+                acc_score = accuracy_score(y_test, predictions)
+                prec_score = precision_score(y_test, predictions, average='weighted', zero_division=0)
+                re_score = recall_score(y_test, predictions, average='weighted', zero_division=0)
+                fscore = f1_score(y_test, predictions, average='weighted')
+                col1,col2,col3,col4 = st.columns(4)
+                col1.write("Accuracy_score: ") 
+                col1.write(acc_score)
+                col2.write("Precision_score: ")
+                col2.write(prec_score)
+                col3.write("Recall_score: ")
+                col3.write(re_score)
+                col4.write("F1_score: ")
+                col4.write(fscore)
+            importances = classifier.feature_importances_
+            feat_importances = pd.Series(
+                importances, index=X.columns).sort_values(ascending=True)
 
-            # accs = accuracy_score(y_test, predictions)
-            # st.info(accs)
-
-            # Generate classification report
+            # Show Gradient Boosting Plot 
             if st.checkbox("Show Classification Report", False, 3):
                 st.subheader('Gradient Boosting Classifier:')
-                st.write(classification_report(y_test, predictions))
+                impPlot(feat_importances, 'Gradient Boosting Classifier')
                 st.write('\n')
 
         # Allow the User to Select Which Model they want to see
