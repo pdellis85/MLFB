@@ -235,7 +235,7 @@ if uploaded_file is not None:
             if st.checkbox("Show Classification Scores", False, 1, 
                            help='''
                            To learn more about the math and meaning behind the Accuracy, Precision, Recall and F1 Score. Please click the link:
-                            https://hackernoon.com/idiots-guide-to-precision-recall-and-confusion-matrix-b32d36463556
+                            https://neptune.ai/blog/evaluation-metrics-binary-classification
                            '''
                            ):
                 acc_score = accuracy_score(y_test, predictions)
@@ -277,7 +277,7 @@ if uploaded_file is not None:
             if st.checkbox("Show Classification Scores", False, 2, 
                            help='''
                            To learn more about the math and meaning behind the Accuracy, Precision, Recall and F1 Score. Please click the link:
-                            https://hackernoon.com/idiots-guide-to-precision-recall-and-confusion-matrix-b32d36463556
+                            https://neptune.ai/blog/evaluation-metrics-binary-classification
                            '''
                            ):
                 acc_score = accuracy_score(y_test, predictions)
@@ -318,7 +318,7 @@ if uploaded_file is not None:
             if st.checkbox("Show Classification Scores", False, 3, 
                            help='''
                            To learn more about the math and meaning behind the Accuracy, Precision, Recall and F1 Score. Please click the link:
-                            https://hackernoon.com/idiots-guide-to-precision-recall-and-confusion-matrix-b32d36463556
+                            https://neptune.ai/blog/evaluation-metrics-binary-classification
                            '''
                            ):
                 acc_score = accuracy_score(y_test, predictions)
