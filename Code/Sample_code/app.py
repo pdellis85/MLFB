@@ -99,8 +99,13 @@ if uploaded_file is not None:
 
     # Data Profiler configuration
     if task == "Data Profiler":
-        pr = ProfileReport(dataset, explorative=True, orange_mode=True)
-        st_profile_report(pr)
+            pr = ProfileReport(
+                dataset,
+                explorative=True,
+                missing_diagrams=None,
+                orange_mode=True,
+                interactions=None)
+            st_profile_report(pr)
 
     # Data Cleaner configuration
     elif task == "Data Cleaner":
