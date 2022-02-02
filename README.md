@@ -70,4 +70,4 @@ IBM Cloud Education. *Machine Learning*. https://www.ibm.com/cloud/learn/machine
 
 SAS. *Machine Learning: What It Is and Why It Matters*.  https://www.sas.com/en_us/insights/analytics/machine-learning.html.  Retrieved 27 January 2022.
 
-Sci-kit Learn.  *Decision Trees.*  https://scikit-learn.org/stable/modules/tree.html.  Retrieved 2 February 2022.
+Sci-kit Learn.  *Decision Trees.*  https://scikit-learn.org/stable/modules/tree.html.  Retrieved 1 February 2022.
