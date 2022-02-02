@@ -234,7 +234,7 @@ if uploaded_file is not None:
             # Show/Hide Classification Scores
             if st.checkbox("Show Classification Scores", False, 1, 
                            help='''
-                           Accuracy Score represents the ratio of the sum of true positives and true negatives out of all the predictions. In other words, it is the ratio between the number of correct predictions to the total number of predictions.
+                           To learn more about the math and meaning behind the Accuracy, Precision, Recall and F1 Score. Please click the link:
                             https://hackernoon.com/idiots-guide-to-precision-recall-and-confusion-matrix-b32d36463556
                            '''
                            ):
@@ -274,7 +274,12 @@ if uploaded_file is not None:
             predictions = model.predict(X_test_scaled)
 
             # Show/Hide Classification Scores
-            if st.checkbox("Show Classification Scores", False, 2):
+            if st.checkbox("Show Classification Scores", False, 2, 
+                           help='''
+                           To learn more about the math and meaning behind the Accuracy, Precision, Recall and F1 Score. Please click the link:
+                            https://hackernoon.com/idiots-guide-to-precision-recall-and-confusion-matrix-b32d36463556
+                           '''
+                           ):
                 acc_score = accuracy_score(y_test, predictions)
                 prec_score = precision_score(y_test, predictions, average='weighted', zero_division=0)
                 re_score = recall_score(y_test, predictions, average='weighted', zero_division=0)
@@ -310,7 +315,12 @@ if uploaded_file is not None:
             predictions = classifier.predict(X_test_scaled)
 
             # Show/Hide Classification Scores
-            if st.checkbox("Show Classification Scores", False, 3):
+            if st.checkbox("Show Classification Scores", False, 3, 
+                           help='''
+                           To learn more about the math and meaning behind the Accuracy, Precision, Recall and F1 Score. Please click the link:
+                            https://hackernoon.com/idiots-guide-to-precision-recall-and-confusion-matrix-b32d36463556
+                           '''
+                           ):
                 acc_score = accuracy_score(y_test, predictions)
                 prec_score = precision_score(y_test, predictions, average='weighted', zero_division=0)
                 re_score = recall_score(y_test, predictions, average='weighted', zero_division=0)
