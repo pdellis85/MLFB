@@ -6,7 +6,7 @@ Machine learning models are typically built by data scientists using computer co
 
 For those who want to dive right into building machine learning models, click this link to launch the app:
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](APP LINK GOES HERE)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/pdellis85/mlfb/main/Code/Sample_code/app.py)
 
 <details>
   
